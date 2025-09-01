@@ -72,7 +72,9 @@ gem "sassc"
 gem "sassc-rails"
 gem "sprockets-rails"
 gem "bcrypt"
+gem "faker"
 
 group :test do
   gem 'rails-controller-testing'
 end
+
