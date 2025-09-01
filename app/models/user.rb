@@ -29,17 +29,17 @@ class User < ApplicationRecord
     remember_digest
   end
 
-   # セッションハイジャック防止のためにセッショントークンを返す
+  # セッションハイジャック防止のためにセッショントークンを返す
   # この記憶ダイジェストを再利用しているのは単に利便性のため
   def session_token
     remember_digest || remember
   end
 
-
   # 渡されたトークンがダイジェストと一致したらtrueを返す
-  def authenticated?(remember_token)
-    return false if remember_digest.nil?
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
   end
 
   # ユーザーのログイン情報を破棄する
@@ -47,17 +47,11 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
-  # セッションハイジャック防止のためにセッショントークンを返す
-  # この記憶ダイジェストを再利用しているのは単に利便性のため
-  def session_token
-    remember_digest || remember
-  end
-
   private
 
     # メールアドレスをすべて小文字にする
     def downcase_email
-      self.email = email.downcase
+      email.downcase!
     end
 
     # 有効化トークンとダイジェストを作成および代入する
