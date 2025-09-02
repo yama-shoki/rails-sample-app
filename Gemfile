@@ -72,9 +72,11 @@ gem "sassc"
 gem "sassc-rails"
 gem "sprockets-rails"
 gem "bcrypt"
+gem "image_processing",           "1.12.2"
 gem "faker"
 gem "will_paginate",           "3.3.1"
 gem "bootstrap-will_paginate", "1.0.0"
+gem "active_storage_validations", "0.9.8"  
 
 group :test do
   gem 'rails-controller-testing'
