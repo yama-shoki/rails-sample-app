@@ -69,4 +69,15 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     get root_path
     assert_template 'static_pages/home'
   end
+
+  test "layout links with logged in user" do
+    user = users(:michael)
+    log_in_as(user)
+    get root_path
+    assert_template 'static_pages/home'
+    assert_select "a[href=?]", following_user_path(user)
+    assert_select "a[href=?]", followers_user_path(user)
+    assert_select "#following", text: user.following.count.to_s
+    assert_select "#followers", text: user.followers.count.to_s
+  end
 end
