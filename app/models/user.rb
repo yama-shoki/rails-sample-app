@@ -85,10 +85,12 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
-   # 試作feedの定義
-  # 完全な実装は次章の「ユーザーをフォローする」を参照
+  # ユーザーのステータスフィードを返す
   def feed
-    Micropost.where("user_id = ?", id)
+    part_of_feed = "relationships.follower_id = :id or microposts.user_id = :id"
+    Micropost.left_outer_joins(user: :followers)
+             .where(part_of_feed, { id: id }).distinct
+             .includes(:user, image_attachment: :blob)
   end
 
   # ユーザーをフォローする
@@ -118,7 +120,5 @@ class User < ApplicationRecord
       self.activation_token  = User.new_token
       self.activation_digest = User.digest(activation_token)
     end
-
-
 
 end
