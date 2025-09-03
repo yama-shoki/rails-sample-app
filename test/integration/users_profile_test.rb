@@ -7,7 +7,7 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     @user = users(:michael)
   end
 
-  test "profile display" do
+  test "profile display with stats" do
     get user_path(@user)
     assert_template 'users/show'
     assert_select 'title', full_title(@user.name)
@@ -18,5 +18,10 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     @user.microposts.paginate(page: 1).each do |micropost|
       assert_match micropost.content, response.body
     end
+    # 統計情報のテストを追加
+    assert_select "a[href=?]", following_user_path(@user)
+    assert_select "a[href=?]", followers_user_path(@user)
+    assert_select "#following", text: @user.following.count.to_s
+    assert_select "#followers", text: @user.followers.count.to_s
   end
 end
