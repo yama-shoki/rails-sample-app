@@ -9,7 +9,9 @@ gem "rails", "~> 7.1.5", ">= 7.1.5.2"
 gem "sprockets-rails"
 
 # Use sqlite3 as the database for Active Record
-gem "sqlite3", ">= 1.4"
+# gem "sqlite3", ">= 1.4"
+gem 'mysql2', '~> 0.5.3'
+gem 'dotenv-rails'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
@@ -70,7 +72,6 @@ end
 gem "bootstrap-sass"
 gem "sassc"
 gem "sassc-rails"
-gem "sprockets-rails"
 gem "bcrypt"
 gem "image_processing",           "1.12.2"
 gem "faker"
