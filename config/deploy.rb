@@ -16,3 +16,7 @@ set :nginx_sites_enabled_path, "/etc/nginx/conf.d"
 
 append :linked_files, "config/master.key"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "node_modules"
+
+# 既存の設定の下に追加
+set :bundle_flags, '--deployment --quiet'
+set :bundle_env_variables, { 'BUNDLE_IGNORE_RUBY_VERSION' => '1' }
