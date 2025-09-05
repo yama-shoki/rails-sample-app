@@ -15,3 +15,6 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "node_module
 set :bundle_flags, '--quiet'
 set :bundle_without, %w{development test}.join(' ')
 set :bundle_env_variables, { 'BUNDLE_IGNORE_RUBY_VERSION' => '1' }
+
+# assets precompileを無効化
+set :skip_assets_precompile, true
