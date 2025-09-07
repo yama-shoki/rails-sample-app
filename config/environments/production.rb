@@ -90,6 +90,9 @@ Rails.application.configure do
   config.action_mailer.default_options = {
     from: Rails.application.credentials.mailgun[:smtp_username]
   }
+  
+  # メール内のURL生成用ホスト設定
+  config.action_mailer.default_url_options = { host: '18.176.18.137' }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
