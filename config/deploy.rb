@@ -2,6 +2,7 @@
 lock "~> 3.19.0"
 set :application, "sample_app"
 set :repo_url, "git@github.com:yama-shoki/rails-sample-app.git"
+set :rbenv_ruby, File.read('.ruby-version').strip
 set :branch, ENV['BRANCH'] || "main"
 
 # Nginxの設定ファイル名と置き場所を修正

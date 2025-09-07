@@ -1,7 +1,7 @@
-server "52.193.159.179", user: "sample_app_user", roles: %w{app db web}
+server "18.176.18.137", user: "sample_app_user", roles: %w{app db web}
 
 set :ssh_options, {
-  keys: %w(~/.ssh/sample_app.pem),
+  keys: %w(/Users/wells_claves/sample_app.pem),
   forward_agent: true,
   auth_methods: %w(publickey),
 }
