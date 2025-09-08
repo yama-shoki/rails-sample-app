@@ -91,3 +91,5 @@ group :test do
   gem 'rails-controller-testing'
 end
 
+
+gem "aws-sdk-s3", "~> 1.198"
