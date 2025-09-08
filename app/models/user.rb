@@ -19,6 +19,7 @@ class User < ApplicationRecord
                     uniqueness: true
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  validate :password_confirmation_without_password
 
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)
@@ -119,6 +120,13 @@ class User < ApplicationRecord
     def create_activation_digest
       self.activation_token  = User.new_token
       self.activation_digest = User.digest(activation_token)
+    end
+
+    # パスワード確認のみ入力された場合のバリデーション
+    def password_confirmation_without_password
+      if password_confirmation.present? && password.blank?
+        errors.add(:password, "can't be blank if password confirmation is provided")
+      end
     end
 
 end
